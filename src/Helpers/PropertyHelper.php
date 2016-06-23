@@ -28,10 +28,11 @@ class PropertyHelper
      */
     public static function setResponseDataTypeAndId(array &$mappings, array &$value)
     {
-        if (empty($type = $value[Serializer::CLASS_IDENTIFIER_KEY]) || (empty($mappings[$type]))) {
+ 	    if (!isset($value[Serializer::CLASS_IDENTIFIER_KEY]) || (empty($mappings[$value[Serializer::CLASS_IDENTIFIER_KEY]]))) {    	
             return [];
         }
-
+        $type = $value[Serializer::CLASS_IDENTIFIER_KEY];
+        
         if (!is_scalar($type)) {
             return self::setResponseDataTypeAndId($mappings, $type);
         }
